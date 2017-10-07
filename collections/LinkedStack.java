@@ -1,4 +1,4 @@
-package seminar1.collections;
+package structures_and_algorythms.collections;
 
 import java.util.Iterator;
 
@@ -9,14 +9,22 @@ public class LinkedStack<Item> implements IStack<Item> {
 
     @Override
     public void push(Item item) {
-        /* TODO: implement it */
+        head = new Node<>(item, head);
+        size++;
     }
 
     @Override
     public Item pop() {
-        /* TODO: implement it */
-        return null;
+        if (head == null) {
+            return null;
+        } else {
+            Node<Item> popItem = head;
+            head = popItem.next;
+            size--;
+            return popItem.item;
+        }
     }
+
 
     @Override
     public boolean isEmpty() {
@@ -37,13 +45,16 @@ public class LinkedStack<Item> implements IStack<Item> {
 
         @Override
         public boolean hasNext() {
-            /* TODO: implement it */
-            return false;
+            return head != null;
         }
 
         @Override
         public Item next() {
-            /* TODO: implement it */
+            if (hasNext()) {
+                Node<Item> nextItem = head;
+                head = head.next;
+                return nextItem.item;
+            }
             return null;
         }
 
