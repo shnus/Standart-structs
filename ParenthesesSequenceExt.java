@@ -23,10 +23,48 @@ public class ParenthesesSequenceExt {
     private static final char LEFT_BRACKET   = '[';
     private static final char RIGHT_BRACKET  = ']';
 
-    // sequence = "()()" | "(({}[]))[[[" | "{}" | ...
-    private static boolean isBalanced(String sequence) {
-        /* TODO: implement it */
-        return false;
+    // sequence = "()()" | "(({}[]))[[[" | "{}" |
+
+    static Set<String> openBrackets = new HashSet(){{
+        add("{");
+        add("[");
+        add("(");
+    }};
+    static Set<String> closeBrackets = new HashSet(){{
+        add("}");
+        add("]");
+        add(")");
+    }};
+
+    private static boolean isBalanced(String line) {
+        Stack<String> brackets = new Stack();
+        Stack<Integer> bracketsNums = new Stack();
+        int i;
+        for (i = 0; i < line.length(); i++) {
+            String bracket = Character.toString(line.charAt(i));
+            if (openBrackets.contains(bracket)) {
+                brackets.push(bracket);
+                bracketsNums.push(i);
+            } else if (closeBrackets.contains(bracket)) {
+                if (brackets.empty()) {
+                    System.out.println(i + 1);
+                    return false;
+                }
+                String topBracket = brackets.pop();
+                bracketsNums.pop();
+                if ((topBracket.equals("[") && !bracket.equals("]"))
+                        || (topBracket.equals("{") && !bracket.equals("}"))
+                        || (topBracket.equals("(") && !bracket.equals(")"))) {
+                    System.out.println(i + 1);
+                    return false;
+                }
+            }
+        }
+        if (!brackets.empty()) {
+            System.out.println(bracketsNums.pop() + 1);
+            return false;
+        } else return true;
+
     }
 
     public static void main(String[] args) {

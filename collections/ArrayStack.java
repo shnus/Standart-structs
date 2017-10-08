@@ -1,7 +1,9 @@
-package seminar1.collections;
+package com.company.nusrat.structures;
 
 import java.util.Arrays;
 import java.util.Iterator;
+
+import com.company.nusrat.structures.interfaces.IStack;
 
 public class ArrayStack<Item> implements IStack<Item> {
 
@@ -17,12 +19,20 @@ public class ArrayStack<Item> implements IStack<Item> {
 
     @Override
     public void push(Item item) {
-        /* TODO: implement it */
+        if(size==elementData.length) grow();
+        elementData[size] = item;
+        size++;
     }
 
     @Override
     public Item pop() {
-        /* TODO: implement it */
+        if(size>0) {
+            Item returnItem = elementData[size-1];
+            size--;
+            if(size>DEFAULT_CAPACITY && size < elementData.length/4)
+                shrink();
+            return returnItem;
+        }
         return null;
     }
 
@@ -37,19 +47,13 @@ public class ArrayStack<Item> implements IStack<Item> {
     }
 
     private void grow() {
-        /**
-         * TODO: implement it
-         * Если массив заполнился,
-         * то увеличить его размер в полтора раз
-         */
+        int newCapacity = elementData.length*3/2;
+        elementData = Arrays.copyOf(elementData, size);
     }
 
     private void shrink() {
-        /**
-         * TODO: implement it
-         * Если количество элементов в четыре раза меньше,
-         * то уменьшить его размер в два раза
-         */
+        int newCapacity = elementData.length/4;
+        elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
     private void changeCapacity(int newCapacity) {
