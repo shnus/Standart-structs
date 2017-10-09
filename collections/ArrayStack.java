@@ -48,7 +48,7 @@ public class ArrayStack<Item> implements IStack<Item> {
 
     private void grow() {
         int newCapacity = elementData.length*3/2;
-        elementData = Arrays.copyOf(elementData, size);
+        elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
     private void shrink() {
