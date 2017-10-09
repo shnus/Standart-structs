@@ -1,6 +1,5 @@
-package seminar1.iterators;
+package structures_and_algorythms.iterators;
 
-import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -8,31 +7,45 @@ import java.util.Iterator;
  * first = 1,3,4,5,7
  * second = 0,2,4,6,8
  * result = 0,1,2,3,4,4,5,6,7,8
- *
+ * <p>
  * Time = O(n + k * log n),
- *  n — количество итераторов
- *  k — суммарное количество элементов
+ * n — количество итераторов
+ * k — суммарное количество элементов
  */
 public class MergingPeekingIncreasingIterator implements Iterator<Integer> {
 
-    private Comparator<PeekingIncreasingIterator> comparator = (p1, p2) -> p1.peek().compareTo(p2.peek());
+    private IncreasingIterator[] iterators;
+    private IncreasingIterator temp;
+    private int min;
 
-    public MergingPeekingIncreasingIterator(IPeekingIterator... peekingIterator) {
-        /* TODO: implement it */
-//        for (int i = 0; i < peekingIterator.length; i++) {
-//            peekingIterator[i].hasNext();
-//        }
+
+    public MergingPeekingIncreasingIterator(IncreasingIterator... peekingIterator) {
+        iterators = peekingIterator;
     }
 
     @Override
     public boolean hasNext() {
-        /* TODO: implement it */
+        for (IncreasingIterator iterator : iterators) {
+            if (iterator.hasNext()) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public Integer next() {
-        /* TODO: implement it */
-        return null;
+        min = Integer.MAX_VALUE;
+        for (IncreasingIterator iterator : iterators) {
+            if (iterator.hasNext()) {
+                if (iterator.curr < min) {
+                    min = iterator.curr;
+                    temp = iterator;
+                }
+            }
+        }
+        temp.curr += temp.random.nextInt(temp.maxGrowth);
+        temp.step++;
+        return min;
     }
 }

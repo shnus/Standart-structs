@@ -19,18 +19,15 @@ public class MergingIncreasingIterator implements Iterator<Integer> {
     public MergingIncreasingIterator(IncreasingIterator first, IncreasingIterator second) {
         this.first = first;
         this.second = second;
-        /* TODO: implement it */
     }
 
     @Override
     public boolean hasNext() {
-        /* TODO: implement it */
         return first.hasNext() || second.hasNext();
     }
 
     @Override
     public Integer next() {
-        /* TODO: implement it */
         int firstNumber = first.curr;
         int secondNumber = second.curr;
 

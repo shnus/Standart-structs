@@ -1,4 +1,4 @@
-package seminar1.iterators;
+package structures_and_algorythms.iterators;
 
 public class PeekingIncreasingIterator extends IncreasingIterator implements IPeekingIterator<Integer> {
 
@@ -33,4 +33,5 @@ public class PeekingIncreasingIterator extends IncreasingIterator implements IPe
         }
         return peekedElement;
     }
+
 }
