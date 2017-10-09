@@ -1,9 +1,9 @@
-package com.company.nusrat.structures;
+package com.company.nusrat.structures.technopolis;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.company.nusrat.structures.interfaces.IDeque;
+import com.company.nusrat.structures.technopolis.interfaces.IDeque;
 
 public class LinkedDeque<Item> implements IDeque<Item> {
     int size;
@@ -25,8 +25,9 @@ public class LinkedDeque<Item> implements IDeque<Item> {
 
     @Override
     public void pushBack(Item item) {
-        Node oldTail = head;
+        Node oldTail = tail;
         Node newNode = new Node(oldTail, item, null);
+        tail = newNode;
         if(oldTail==null){
             head = newNode;
         } else {
