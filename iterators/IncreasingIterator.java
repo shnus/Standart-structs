@@ -1,4 +1,4 @@
-package seminar1.iterators;
+package structures_and_algorythms.iterators;
 
 import java.util.Iterator;
 import java.util.Random;
