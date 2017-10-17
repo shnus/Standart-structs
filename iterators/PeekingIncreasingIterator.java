@@ -1,6 +1,6 @@
 package structures_and_algorythms.iterators;
 
-public class PeekingIncreasingIterator extends IncreasingIterator implements IPeekingIterator<Integer> {
+public class PeekingIncreasingIterator extends IncreasingIterator implements IPeekingIterator<Integer>, Comparable<PeekingIncreasingIterator> {
 
     private boolean hasPeeked;
     private Integer peekedElement;
@@ -34,4 +34,8 @@ public class PeekingIncreasingIterator extends IncreasingIterator implements IPe
         return peekedElement;
     }
 
+    @Override
+    public int compareTo(PeekingIncreasingIterator o) {
+        return this.peek().compareTo(o.peek());
+    }
 }
